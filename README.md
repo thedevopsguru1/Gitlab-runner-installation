@@ -59,7 +59,7 @@ gitlabUrl: https://gitlab.com/
 
 ##
 ## Go to Steiings, CICD , then Runner, next to new project runner , click on the three dat and copy it there
-runnerRegistrationToken: "GR1348941n1gLb9HYVmDJ2gXBzyye"
+runnerRegistrationToken: "GR1348941n1gL"
 
  
 
