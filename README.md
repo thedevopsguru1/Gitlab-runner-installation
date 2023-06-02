@@ -2,23 +2,7 @@
 ### Go to your Gitlab repo and . settting , then CI/CD , then runners. 
 ### Next the new project runner, click on three dat , then copy and paste it in the values file adn line 49.
 ### Then run these commands:
-#### Create a Service Account named priv-sa
-```
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRoleBinding
-metadata:
-  name: read-pods
-  namespace: kube-system
-subjects:
-  - kind: ServiceAccount
-    name: priv-sa
-    namespace: gitlab-runner
-roleRef:
-  kind: ClusterRole
-  name: cluster-admin
-  apiGroup: rbac.authorization.k8s.io
 
-```
 ```
 kubectl create ns gitlab-runner-project-name
 ```
@@ -75,7 +59,7 @@ gitlabUrl: https://gitlab.com/
 
 ##
 ## Go to Steiings, CICD , then Runner, next to new project runner , click on the three dat and copy it there
-runnerRegistrationToken: "GR1348"
+runnerRegistrationToken: "GR1348941n1gLb9HYVmDJ2gXBzyye"
 
  
 
@@ -182,18 +166,26 @@ checkInterval: 30
 ## For RBAC support:
 
 rbac:
-
   create: true
-
-  ## Define specific rbac permissions.
-
-  # resources: ["pods", "pods/exec", "secrets"]
-
-  # verbs: ["get", "list", "watch", "create", "patch", "delete"]
-
-  resources: ["pods","pods/exec","secrets","pods/attach","configmaps"]
-
-  verbs: ["get","list","watch","create","patch","delete","update"]
+  rules:
+    - apiGroups: [""]
+      resources: ["pods"]
+      verbs: ["list", "get", "watch", "create", "delete"]
+    - apiGroups: [""]
+      resources: ["pods/exec"]
+      verbs: ["create"]
+    - apiGroups: [""]
+      resources: ["pods/log"]
+      verbs: ["get"]
+    - apiGroups: [""]
+      resources: ["pods/attach"]
+      verbs: ["list", "get", "create", "delete", "update"]
+    - apiGroups: [""]
+      resources: ["secrets"]
+      verbs: ["list", "get", "create", "delete", "update"]      
+    - apiGroups: [""]
+      resources: ["configmaps"]
+      verbs: ["list", "get", "create", "delete", "update"] 
 
  
 
@@ -491,7 +483,8 @@ runners:
 
   ##
 
-  serviceAccountName: priv-sa # add the sa that is in shellback cluster or whatever cluster you are working on
+  #
+  #serviceAccountName: priv-sa # add the sa that is in shellback cluster or whatever cluster you are working on
 
  
 
@@ -588,4 +581,3 @@ resources:
 ...
 
 ```
-
