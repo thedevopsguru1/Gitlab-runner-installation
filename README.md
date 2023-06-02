@@ -2,6 +2,23 @@
 ### Go to your Gitlab repo and . settting , then CI/CD , then runners. 
 ### Next the new project runner, click on three dat , then copy and paste it in the values file adn line 49.
 ### Then run these commands:
+#### Create a Service Account named priv-sa
+```
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: read-pods
+  namespace: kube-system
+subjects:
+  - kind: ServiceAccount
+    name: priv-sa
+    namespace: gitlab-runner
+roleRef:
+  kind: ClusterRole
+  name: cluster-admin
+  apiGroup: rbac.authorization.k8s.io
+
+```
 ```
 kubectl create ns gitlab-runner-project-name
 ```
