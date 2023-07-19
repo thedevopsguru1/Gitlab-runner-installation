@@ -13,7 +13,7 @@ helm repo add gitlab https://charts.gitlab.io
 helm repo update gitlab
 ```
 ```
-helm install -n gitlab-runner gitlab gitlab/gitlab-runner -f values.yaml
+helm upgrade --install -n gitlab-runner gitlab gitlab/gitlab-runner -f values.yaml --create-namespace -n gitlab-runner
 ```
 ## here is the value file
 ```
