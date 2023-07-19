@@ -7,6 +7,12 @@
 kubectl create ns gitlab-runner-project-name
 ```
 ```
+helm repo add gitlab https://charts.gitlab.io
+```
+```
+helm repo update gitlab
+```
+```
 helm install -n gitlab-runner gitlab gitlab/gitlab-runner -f values.yaml
 ```
 ## here is the value file
